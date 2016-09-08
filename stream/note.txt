@@ -1,0 +1,7 @@
+1.所有的流都是EventEmitter的实例
+
+2.一个可读流具有下述的方法、成员、及事件。
+
+function (data) { }
+
+'data'事件的回调函数参数默认情况下是一个Buffer对象。如果使用了setEncoding() 则参数为一个字符串。
