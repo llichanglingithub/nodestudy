@@ -1,0 +1,104 @@
+1.核心模块是预先加载，他们的表示服被 require 关联
+2.核心模块在node源代码中的lib文件夹下。
+3.模块将在第一次加载时被缓存
+
+
+
+
+##process 进程 
+	process是一个全局对象，在任何时候都可以访问他
+	它是EventEmitter事件触发器类型的一个实例
+
+	------监听exit行为的示例：
+
+	process.on('exit', function () {
+	  process.nextTick(function () {
+	   console.log('This will not run');
+	  });
+	  console.log('About to exit.');
+	});
+
+	------process.stdout
+	一个指向标准输出stdout的Writable Stream可写流
+	console.log = function (d) {
+	  process.stdout.write(d + '\n');
+	};
+
+	------process.stderr
+	一个指向错误的可写流，在这个流上的写操作是阻塞式的。
+
+	------process.stdin
+	一个到标准输入的可读流Readable Stream。默认情况下标准输入流是暂停的，要从中读取内容需要调用方法process.stdin.resume()
+
+	示例：打开标准输入与监听两个事件：
+
+	process.stdin.resume();
+	process.stdin.setEncoding('utf8');
+
+	process.stdin.on('data', function (chunk) {
+	  process.stdout.write('data: ' + chunk);
+	});
+
+	process.stdin.on('end', function () {
+	  process.stdout.write('end');
+	});
+
+	------process.chdir(directory)
+	改变进程的当前工作目录，如果操作失败则抛出异常。
+
+	console.log('Starting directory: ' + process.cwd());
+	try {
+	  process.chdir('/tmp');
+	  console.log('New directory: ' + process.cwd());
+	}
+	catch (err) {
+	  console.log('chdir: ' + err);
+	}
+
+	------process.cwd()
+	返回进程的当前工作目录。
+	console.log('Current directory: ' + process.cwd());
+
+	------process.env
+	一个包括用户环境的对象。
+
+	------process.exit(code=0)
+	用指定的code代码结束进程。如果不指定，退出时将使用'success'（成功）代码 0。
+	以'failure'（失败）代码退出的示例：
+
+	------process.exit(1)
+	执行node的shell会把退出代码视为1。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
